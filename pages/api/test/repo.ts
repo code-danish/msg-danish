@@ -1,6 +1,9 @@
+import { MongoClient } from 'mongodb'
 const repo = ()=>{
 	const save = async () =>{
-		const client = await _mongoClientPromise;
+		const url = process.env.MONGODB_URI||'';
+		
+		const client = new MongoClient(url);
 		const db = client.db("testDB");
 		const movies = await db
            .collection("movies")
