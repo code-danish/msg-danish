@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import clientPromise from '../lib/mongodb'
 import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
+import axios from 'axios'
 
 type ConnectionStatus = {
   isConnected: boolean
@@ -34,6 +35,9 @@ export const getServerSideProps: GetServerSideProps<
 export default function Home({
   isConnected,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  const testDb =()=>{
+    axios.get('/api/test/test').catch((err)=>{console.log(err)})
+  }
   return (
     <div className="container">
       <Head>
@@ -45,7 +49,7 @@ export default function Home({
         <h1 className="title">
           Welcome to <a href="https://nextjs.org">Next.js with MongoDB!</a>
         </h1>
-
+        <button onClick={testDb}>Test Db</button>
         {isConnected ? (
           <h2 className="subtitle">You are connected to MongoDB</h2>
         ) : (
