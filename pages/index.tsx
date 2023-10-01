@@ -36,7 +36,13 @@ export default function Home({
   isConnected,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const testDb =()=>{
+    console.log('hitting test api');
     axios.get('/api/test/test').catch((err)=>{console.log(err)})
+    console.log('hitting session api');
+    axios.post('/api/session',{"session":"something"}).catch((err)=>{console.log(err)})
+    console.log('hitting user api');
+    axios.post('/api/user',{"user":"danish"}).catch((err)=>{console.log(err)})
+    console.log('done hitting apis');
   }
   return (
     <div className="container">
